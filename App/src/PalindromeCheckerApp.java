@@ -1,54 +1,47 @@
-import java.util.Arrays;
-import java.util.List;
-
 /**
+ *
  * =========================================================
- * MAIN CLASS - UseCase13PerformanceBenchmark
+ * MAIN CLASS - UseCase1PalindromeCheckerApp
  * =========================================================
  *
- * Compares execution time of different palindrome strategies.
+ * Use Case 1: Application Entry & Welcome Message
  *
- * Key Concepts:
- * - System.nanoTime()
- * - Algorithm performance comparison
+ * Description:
+ * This class represents the entry point of the
+ * Palindrome Checker Management System.
  *
- * @version 13.0
+ * At this stage, the application:
+ * - Starts execution from the main() method
+ * - Displays a welcome message
+ * - Shows application version
+ *
+ * No palindrome logic is implemented yet.
+ *
+ * The goal is to establish a clear startup flow.
+ *
+ * @author Kabilesh C
+ * @version 1.0
  */
 
 public class PalindromeCheckerApp {
 
+    /**
+     * Application entry point.
+     *
+     * This is the first method executed by the JVM
+     * when the program starts.
+     *
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
 
-        String input = "A man a plan a canal Panama";
-
-        System.out.println("=================================");
-        System.out.println("Palindrome Performance Benchmark - UC13");
-        System.out.println("=================================");
-        System.out.println("Input: " + input);
+        System.out.println("===========================================");
+        System.out.println("     Welcome to Palindrome Checker App     ");
+        System.out.println("===========================================");
+        System.out.println("Application Name : Palindrome Checker App");
+        System.out.println("Version          : 1.0");
         System.out.println();
-
-        List<PalindromeStrategy> strategies = Arrays.asList(
-                new TwoPointerStrategy(),
-                new StackStrategy(),
-                new DequeStrategy()
-        );
-
-        for (PalindromeStrategy strategy : strategies) {
-
-            PalindromeChecker checker = new PalindromeChecker(strategy);
-
-            long startTime = System.nanoTime();
-
-            boolean result = checker.check(input);
-
-            long endTime = System.nanoTime();
-
-            long duration = endTime - startTime;
-
-            System.out.println(strategy.getClass().getSimpleName());
-            System.out.println("Result: " + result);
-            System.out.println("Execution Time (ns): " + duration);
-            System.out.println("---------------------------------");
-        }
+        System.out.println("System initialized successfully.");
+        System.out.println("Ready for next use case implementation...");
     }
 }

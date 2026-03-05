@@ -1,8 +1,8 @@
 # Palindrome Checker – Data Structures, OOPS & Design Patterns
 
 ## 👨‍💻 Author
-**Kabilesh C**  
-📧 kabileshc.dev@gmail.com
+**Risikesh Somnath T**  
+📧 risisonu2006@gmail.com
 
 ---
 
@@ -168,5 +168,5 @@ java PalindromeCheckerApp
 
 If you would like to connect or discuss improvements:
 
-- Kabilesh C
-- 📧 kabileshc.dev@gmail.com
+- Risikesh Somnath T
+- 📧 risisonu2006@gmail.com
