@@ -1,66 +1,43 @@
 /**
  *
  * =========================================================
- * MAIN CLASS - UseCase8PalindromeCheckerApp
+ * MAIN CLASS - UseCase9PalindromeCheckerApp
  * =========================================================
  *
- * Use Case 8: Palindrome Validation Using Singly Linked List
+ * Use Case 9: Palindrome Validation Using Recursion
  *
  * Description:
- * This program converts a string into a singly linked list,
- * finds the middle using fast and slow pointers,
- * reverses the second half in-place,
- * and compares both halves to check palindrome.
+ * This program checks whether a string is a palindrome
+ * using recursion.
+ *
+ * It compares the first and last characters,
+ * then recursively checks the remaining substring.
  *
  * Key Concepts:
- * - Singly Linked List
- * - Node traversal
- * - Fast & Slow pointer technique
- * - In-place reversal
+ * - Recursion
+ * - Base condition
+ * - Call stack
+ *
+ * Data Structure Used:
+ * - Call Stack
  *
  * @author Kabilesh C
- * @version 8.0
+ * @version 9.0
  */
 
 public class PalindromeCheckerApp {
 
-    // Node structure
-    static class Node {
-        char data;
-        Node next;
-
-        Node(char data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
-
     public static void main(String[] args) {
 
-        String input = "level";
+        String input = "radar";
 
         System.out.println("=================================");
-        System.out.println("Palindrome Checker - UC8");
+        System.out.println("Palindrome Checker - UC9");
         System.out.println("=================================");
         System.out.println("Input String: " + input);
         System.out.println();
 
-        // Convert string to linked list
-        Node head = null, tail = null;
-
-        for (int i = 0; i < input.length(); i++) {
-            Node newNode = new Node(input.charAt(i));
-
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-            }
-        }
-
-        boolean isPalindrome = checkPalindrome(head);
+        boolean isPalindrome = checkPalindrome(input, 0, input.length() - 1);
 
         if (isPalindrome) {
             System.out.println("Result: The string is a Palindrome.");
@@ -72,50 +49,27 @@ public class PalindromeCheckerApp {
         System.out.println("Program execution completed.");
     }
 
-    // Palindrome check using linked list
-    public static boolean checkPalindrome(Node head) {
+    /**
+     * Recursive palindrome check
+     *
+     * @param str   Input string
+     * @param start Starting index
+     * @param end   Ending index
+     * @return true if palindrome, false otherwise
+     */
+    public static boolean checkPalindrome(String str, int start, int end) {
 
-        if (head == null || head.next == null)
+        // Base condition: crossed pointers
+        if (start >= end) {
             return true;
-
-        Node slow = head;
-        Node fast = head;
-
-        // Find middle using fast and slow pointer
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
         }
 
-        // Reverse second half
-        Node secondHalf = reverse(slow);
-        Node firstHalf = head;
-
-        // Compare both halves
-        while (secondHalf != null) {
-            if (firstHalf.data != secondHalf.data)
-                return false;
-
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
+        // If mismatch found
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
         }
 
-        return true;
-    }
-
-    // In-place reversal of linked list
-    public static Node reverse(Node head) {
-
-        Node prev = null;
-        Node current = head;
-
-        while (current != null) {
-            Node nextNode = current.next;
-            current.next = prev;
-            prev = current;
-            current = nextNode;
-        }
-
-        return prev;
+        // Recursive call for inner substring
+        return checkPalindrome(str, start + 1, end - 1);
     }
 }
