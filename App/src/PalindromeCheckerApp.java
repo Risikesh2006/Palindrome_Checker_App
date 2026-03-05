@@ -1,23 +1,25 @@
 /**
  *
  * =========================================================
- * MAIN CLASS - UseCase3PalindromeCheckerApp
+ * MAIN CLASS - UseCase4PalindromeCheckerApp
  * =========================================================
  *
- * Use Case 3: Palindrome Check by Reversing String
+ * Use Case 4: Palindrome Check using Character Array
+ * and Two-Pointer Technique
  *
  * Description:
- * This class checks whether a given string is a palindrome
- * by reversing it using a loop and comparing the result.
+ * This class checks whether a string is a palindrome
+ * by converting it into a character array and
+ * comparing characters using the two-pointer approach.
  *
  * Key focus:
- * - for loop
- * - String immutability
- * - String concatenation
- * - equals() method
+ * - char[] (Character Array)
+ * - Array indexing
+ * - Two-pointer technique
+ * - Time efficiency awareness
  *
  * @author Kabilesh C
- * @version 3.0
+ * @version 4.0
  */
 
 public class PalindromeCheckerApp {
@@ -29,25 +31,37 @@ public class PalindromeCheckerApp {
      */
     public static void main(String[] args) {
 
-        String original = "level";
-        String reversed = "";
+        String input = "radar";
 
         System.out.println("=================================");
-        System.out.println("Palindrome Checker - UC3");
+        System.out.println("Palindrome Checker - UC4");
         System.out.println("=================================");
-        System.out.println("Original String: " + original);
+        System.out.println("Input String: " + input);
         System.out.println();
 
-        // Reverse using for loop
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversed = reversed + original.charAt(i);
+        // Convert String to char array
+        char[] characters = input.toCharArray();
+
+        // Two-pointer initialization
+        int start = 0;
+        int end = characters.length - 1;
+
+        boolean isPalindrome = true;
+
+        // Compare characters using two-pointer technique
+        while (start < end) {
+
+            if (characters[start] != characters[end]) {
+                isPalindrome = false;
+                break;
+            }
+
+            start++;
+            end--;
         }
 
-        System.out.println("Reversed String: " + reversed);
-        System.out.println();
-
-        // Compare content using equals()
-        if (original.equals(reversed)) {
+        // Display result
+        if (isPalindrome) {
             System.out.println("Result: The string is a Palindrome.");
         } else {
             System.out.println("Result: The string is NOT a Palindrome.");
