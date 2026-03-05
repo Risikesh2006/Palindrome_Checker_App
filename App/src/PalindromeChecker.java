@@ -3,55 +3,28 @@
  * CLASS - PalindromeChecker
  * =========================================================
  *
- * Encapsulates palindrome validation logic.
+ * Context class for Strategy Pattern.
  *
- * OOPS Concepts:
- * - Encapsulation
- * - Single Responsibility Principle
+ * Allows runtime selection of palindrome algorithm.
  *
- * Internal Data Structure:
- * - Character Array (Two-pointer approach)
- *
- * @version 11.0
+ * @version 12.0
  */
 
 public class PalindromeChecker {
 
-    /**
-     * Public method accessible to other classes.
-     * Hides internal implementation details.
-     */
-    public boolean checkPalindrome(String input) {
+    private PalindromeStrategy strategy;
 
-        if (input == null) {
-            return false;
-        }
-
-        String normalized = normalize(input);
-        return isPalindrome(normalized);
+    // Inject strategy through constructor
+    public PalindromeChecker(PalindromeStrategy strategy) {
+        this.strategy = strategy;
     }
 
-    // Private method: handles preprocessing
-    private String normalize(String input) {
-        return input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+    public boolean check(String input) {
+        return strategy.checkPalindrome(input);
     }
 
-    // Private method: core palindrome logic
-    private boolean isPalindrome(String str) {
-
-        char[] chars = str.toCharArray();
-
-        int left = 0;
-        int right = chars.length - 1;
-
-        while (left < right) {
-            if (chars[left] != chars[right]) {
-                return false;
-            }
-            left++;
-            right--;
-        }
-
-        return true;
+    // Allow changing strategy dynamically
+    public void setStrategy(PalindromeStrategy strategy) {
+        this.strategy = strategy;
     }
 }
