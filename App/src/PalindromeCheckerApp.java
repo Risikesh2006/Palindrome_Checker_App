@@ -1,3 +1,20 @@
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * =========================================================
+ * MAIN CLASS - UseCase13PerformanceBenchmark
+ * =========================================================
+ *
+ * Compares execution time of different palindrome strategies.
+ *
+ * Key Concepts:
+ * - System.nanoTime()
+ * - Algorithm performance comparison
+ *
+ * @version 13.0
+ */
+
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
@@ -5,23 +22,33 @@ public class PalindromeCheckerApp {
         String input = "A man a plan a canal Panama";
 
         System.out.println("=================================");
-        System.out.println("Palindrome Checker - UC12");
+        System.out.println("Palindrome Performance Benchmark - UC13");
         System.out.println("=================================");
         System.out.println("Input: " + input);
         System.out.println();
 
-        // Choose strategy at runtime
-        PalindromeStrategy strategy = new StackStrategy();
-        // PalindromeStrategy strategy = new DequeStrategy();
+        List<PalindromeStrategy> strategies = Arrays.asList(
+                new TwoPointerStrategy(),
+                new StackStrategy(),
+                new DequeStrategy()
+        );
 
-        PalindromeChecker checker = new PalindromeChecker(strategy);
+        for (PalindromeStrategy strategy : strategies) {
 
-        boolean result = checker.check(input);
+            PalindromeChecker checker = new PalindromeChecker(strategy);
 
-        if (result) {
-            System.out.println("Result: The string is a Palindrome.");
-        } else {
-            System.out.println("Result: The string is NOT a Palindrome.");
+            long startTime = System.nanoTime();
+
+            boolean result = checker.check(input);
+
+            long endTime = System.nanoTime();
+
+            long duration = endTime - startTime;
+
+            System.out.println(strategy.getClass().getSimpleName());
+            System.out.println("Result: " + result);
+            System.out.println("Execution Time (ns): " + duration);
+            System.out.println("---------------------------------");
         }
     }
 }
