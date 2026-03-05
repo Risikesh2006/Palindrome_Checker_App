@@ -1,26 +1,29 @@
 /**
  *
  * =========================================================
- * MAIN CLASS - UseCase4PalindromeCheckerApp
+ * MAIN CLASS - UseCase5PalindromeCheckerApp
  * =========================================================
  *
- * Use Case 4: Palindrome Check using Character Array
- * and Two-Pointer Technique
+ * Use Case 5: Stack-Based Palindrome Validation
  *
  * Description:
  * This class checks whether a string is a palindrome
- * by converting it into a character array and
- * comparing characters using the two-pointer approach.
+ * using a Stack data structure.
+ *
+ * The stack follows LIFO (Last In First Out),
+ * which naturally reverses the string.
  *
  * Key focus:
- * - char[] (Character Array)
- * - Array indexing
- * - Two-pointer technique
- * - Time efficiency awareness
+ * - Stack
+ * - Push operation
+ * - Pop operation
+ * - Reversal logic using LIFO
  *
  * @author Kabilesh C
- * @version 4.0
+ * @version 5.0
  */
+
+import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
@@ -31,33 +34,33 @@ public class PalindromeCheckerApp {
      */
     public static void main(String[] args) {
 
-        String input = "radar";
+        String input = "level";
 
         System.out.println("=================================");
-        System.out.println("Palindrome Checker - UC4");
+        System.out.println("Palindrome Checker - UC5");
         System.out.println("=================================");
         System.out.println("Input String: " + input);
         System.out.println();
 
-        // Convert String to char array
-        char[] characters = input.toCharArray();
+        // Create Stack
+        Stack<Character> stack = new Stack<>();
 
-        // Two-pointer initialization
-        int start = 0;
-        int end = characters.length - 1;
+        // Push characters into stack
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+        }
 
         boolean isPalindrome = true;
 
-        // Compare characters using two-pointer technique
-        while (start < end) {
+        // Pop and compare
+        for (int i = 0; i < input.length(); i++) {
 
-            if (characters[start] != characters[end]) {
+            char poppedChar = stack.pop();
+
+            if (input.charAt(i) != poppedChar) {
                 isPalindrome = false;
                 break;
             }
-
-            start++;
-            end--;
         }
 
         // Display result
