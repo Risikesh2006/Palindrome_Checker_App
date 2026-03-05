@@ -1,19 +1,23 @@
 /**
  *
  * =========================================================
- * MAIN CLASS - UseCase2PalindromeCheckerApp
+ * MAIN CLASS - UseCase3PalindromeCheckerApp
  * =========================================================
  *
- * Use Case 2: Hardcoded Palindrome Validation
+ * Use Case 3: Palindrome Check by Reversing String
  *
  * Description:
- * This class checks whether a hardcoded string
- * is a palindrome and displays the result.
+ * This class checks whether a given string is a palindrome
+ * by reversing it using a loop and comparing the result.
  *
- * No user input is taken in this stage.
+ * Key focus:
+ * - for loop
+ * - String immutability
+ * - String concatenation
+ * - equals() method
  *
  * @author Kabilesh C
- * @version 2.0
+ * @version 3.0
  */
 
 public class PalindromeCheckerApp {
@@ -25,27 +29,28 @@ public class PalindromeCheckerApp {
      */
     public static void main(String[] args) {
 
-        // Hardcoded string literal
-        String word = "madam";
-
-        System.out.println("=================================");
-        System.out.println("Palindrome Checker - UC2");
-        System.out.println("=================================");
-        System.out.println("Word to check: " + word);
-        System.out.println();
-
-        // Reverse the string
+        String original = "level";
         String reversed = "";
 
-        for (int i = word.length() - 1; i >= 0; i--) {
-            reversed = reversed + word.charAt(i);
+        System.out.println("=================================");
+        System.out.println("Palindrome Checker - UC3");
+        System.out.println("=================================");
+        System.out.println("Original String: " + original);
+        System.out.println();
+
+        // Reverse using for loop
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);
         }
 
-        // Palindrome condition check
-        if (word.equals(reversed)) {
-            System.out.println("Result: The word is a Palindrome.");
+        System.out.println("Reversed String: " + reversed);
+        System.out.println();
+
+        // Compare content using equals()
+        if (original.equals(reversed)) {
+            System.out.println("Result: The string is a Palindrome.");
         } else {
-            System.out.println("Result: The word is NOT a Palindrome.");
+            System.out.println("Result: The string is NOT a Palindrome.");
         }
 
         System.out.println();
