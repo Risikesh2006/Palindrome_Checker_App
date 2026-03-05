@@ -1,68 +1,67 @@
 /**
  *
  * =========================================================
- * MAIN CLASS - UseCase7PalindromeCheckerApp
+ * MAIN CLASS - UseCase8PalindromeCheckerApp
  * =========================================================
  *
- * Use Case 7: Palindrome Validation Using Deque
+ * Use Case 8: Palindrome Validation Using Singly Linked List
  *
  * Description:
- * This class checks whether a string is a palindrome
- * using a Deque (Double Ended Queue).
+ * This program converts a string into a singly linked list,
+ * finds the middle using fast and slow pointers,
+ * reverses the second half in-place,
+ * and compares both halves to check palindrome.
  *
- * The deque allows insertion and removal from both
- * front and rear ends, enabling direct comparison
- * of first and last characters.
- *
- * Key focus:
- * - Deque
- * - addLast()
- * - removeFirst()
- * - removeLast()
- * - Front and rear comparison
+ * Key Concepts:
+ * - Singly Linked List
+ * - Node traversal
+ * - Fast & Slow pointer technique
+ * - In-place reversal
  *
  * @author Kabilesh C
- * @version 7.0
+ * @version 8.0
  */
-
-import java.util.Deque;
-import java.util.LinkedList;
 
 public class PalindromeCheckerApp {
 
+    // Node structure
+    static class Node {
+        char data;
+        Node next;
+
+        Node(char data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
     public static void main(String[] args) {
 
-        String input = "racecar";
+        String input = "level";
 
         System.out.println("=================================");
-        System.out.println("Palindrome Checker - UC7");
+        System.out.println("Palindrome Checker - UC8");
         System.out.println("=================================");
         System.out.println("Input String: " + input);
         System.out.println();
 
-        // Create Deque
-        Deque<Character> deque = new LinkedList<>();
+        // Convert string to linked list
+        Node head = null, tail = null;
 
-        // Insert characters into deque
         for (int i = 0; i < input.length(); i++) {
-            deque.addLast(input.charAt(i));
-        }
+            Node newNode = new Node(input.charAt(i));
 
-        boolean isPalindrome = true;
-
-        // Compare front and rear
-        while (deque.size() > 1) {
-
-            char front = deque.removeFirst();
-            char rear = deque.removeLast();
-
-            if (front != rear) {
-                isPalindrome = false;
-                break;
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
             }
         }
 
-        // Display result
+        boolean isPalindrome = checkPalindrome(head);
+
         if (isPalindrome) {
             System.out.println("Result: The string is a Palindrome.");
         } else {
@@ -71,5 +70,52 @@ public class PalindromeCheckerApp {
 
         System.out.println();
         System.out.println("Program execution completed.");
+    }
+
+    // Palindrome check using linked list
+    public static boolean checkPalindrome(Node head) {
+
+        if (head == null || head.next == null)
+            return true;
+
+        Node slow = head;
+        Node fast = head;
+
+        // Find middle using fast and slow pointer
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Reverse second half
+        Node secondHalf = reverse(slow);
+        Node firstHalf = head;
+
+        // Compare both halves
+        while (secondHalf != null) {
+            if (firstHalf.data != secondHalf.data)
+                return false;
+
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+
+        return true;
+    }
+
+    // In-place reversal of linked list
+    public static Node reverse(Node head) {
+
+        Node prev = null;
+        Node current = head;
+
+        while (current != null) {
+            Node nextNode = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextNode;
+        }
+
+        return prev;
     }
 }
